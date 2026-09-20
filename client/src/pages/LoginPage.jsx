@@ -40,13 +40,6 @@ export const LoginPage = () => {
           <p className="text-xs text-pink-900/60 mt-1">Log in to access your student planner</p>
         </div>
 
-        {/* Demo Credentials Quick Pill */}
-        <div className="mb-6 p-3 bg-pink-50 rounded-2xl border border-pink-200 text-xs text-pink-900">
-          <p className="font-bold text-pink-700 mb-0.5">💡 Demo Account Credentials:</p>
-          <p><span className="font-semibold">Email:</span> aakash@student.com</p>
-          <p><span className="font-semibold">Password:</span> password123</p>
-        </div>
-
         {/* Error Alert */}
         {error && (
           <div className="mb-6 p-3 bg-rose-50 border border-rose-200 text-rose-700 text-xs rounded-2xl flex items-center gap-2">
