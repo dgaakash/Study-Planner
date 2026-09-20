@@ -36,26 +36,31 @@ app.get('/', (req, res) => {
 // Centralized error handler
 app.use(errorHandler);
 
-const PORT = process.env.PORT || 5000;
+// Export app for Vercel serverless usage
+module.exports = app;
 
-// Boot sequence: connect DB first, then start listening
-const startServer = async () => {
-  try {
-    await connectDB();
+// Local development: only start listening when run directly
+if (require.main === module) {
+  const PORT = process.env.PORT || 5000;
 
-    // When running with In-Memory DB, auto-seed demo data so the app works instantly
-    if (isUsingInMemory()) {
-      console.log('📦 In-Memory mode detected — auto-seeding demo data...');
-      await seedDatabase();
+  const startServer = async () => {
+    try {
+      await connectDB();
+
+      // When running with In-Memory DB, auto-seed demo data so the app works instantly
+      if (isUsingInMemory()) {
+        console.log('📦 In-Memory mode detected — auto-seeding demo data...');
+        await seedDatabase();
+      }
+
+      app.listen(PORT, () => {
+        console.log(`🌸 StudyBloom Server ready on http://localhost:${PORT}`);
+      });
+    } catch (error) {
+      console.error(`❌ Server startup failed: ${error.message}`);
+      process.exit(1);
     }
+  };
 
-    app.listen(PORT, () => {
-      console.log(`🌸 StudyBloom Server ready on http://localhost:${PORT}`);
-    });
-  } catch (error) {
-    console.error(`❌ Server startup failed: ${error.message}`);
-    process.exit(1);
-  }
-};
-
-startServer();
+  startServer();
+}
