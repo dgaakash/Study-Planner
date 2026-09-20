@@ -82,7 +82,7 @@ export const RegisterPage = () => {
                 required
                 value={formData.name}
                 onChange={handleChange}
-                placeholder="Aakash Sharma"
+                placeholder="Blessi Jasmine"
                 className="w-full pl-10 pr-4 py-2.5 bg-pink-50/40 border border-pink-200 rounded-xl text-sm text-dark placeholder:text-pink-300 focus:outline-none focus:ring-2 focus:ring-pink-400"
               />
             </div>
